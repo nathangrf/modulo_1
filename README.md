@@ -24,20 +24,4 @@ exemple de tableau
 | 1 | 1 | 1 | 1 |
 
 
-<html>
-  <head>
-    <h1>Mi primer pagina de web</h1>
-  </head>
-  <body>
-    Esto es el cuerpo del texto.
-    <p>Esto es un parrafo</p>
-
-    <u1>
-
-      <li>primero</li>
-      <li>segundo</li>
-      <li>tercero</li>
-    </u1>
-  </body>
-</html>
   
