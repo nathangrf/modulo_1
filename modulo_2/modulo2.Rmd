@@ -1,0 +1,385 @@
+---
+title: "Algoritmos"
+author: "Los Palmeras"
+date: "2026-04-22"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```
+## Introducción
+
+Este es un documento en R Markdown. Permite generar HTML o Word combinando texto y código.
+
+El lenguaje R es una poderosa herramienta matemática y estadística. En este reporte generado con R Markdown, analizaremos la resolución de distintos problemas y evaluaremos la calidad de diferentes algoritmos implementados.
+
+## Probando primeros comandos de R
+
+R es un leguaje muy parecido a matlab y trabaja con variables que en general pueden ser matrices.
+
+
+```{r}
+A <- 38
+A <- 40
+B <- 60
+C <- B - A
+C
+```
+
+
+## Uso de data sets o base de datos internos de R
+
+Usando el comando *data()* en la consola obtenemos distintos datos ya cargados en la base de datos de R, estos datos estan cargados en tablas de las cuales podemos elegir columnas especificas si escribimos el signo *\$* despues del comando de informacion especifico que queremos.
+
+También está el comando *summary()*, que es una de las herramientas más útiles y rápidas que tiene R para hacer estadística descriptiva básica.
+
+```{r}
+# Planteamos el dataset
+data(cars)
+```
+
+```{r}
+# Usamos el símbolo $ para extraer SOLO la columna de velocidades (speed)
+velocidades <- cars$speed
+
+# Mostramos los primeros 6 valores de esa columna aislada
+head(velocidades)
+```
+
+```{r}
+summary(cars)
+```
+
+## Comando plot (Gráficos)
+
+Es un comando que sirve para graficar cualquier fuente de datos que le asignemos: Tenemos la posibilidad de asignar nombres a las variables o hacer cambios del grafico, en caso de no saber el comando podemos escribir **plot** en la consola, a la derecha nos va a abrir una pestaña y ahí tocar Generic X-Y Plotting y ahi nos va a explicar cada comando
+
+
+```{r}
+plot(pressure, type = "s",
+     main = "Presión del gas ideal",
+     ylab = "hPa",
+     xlab = "K")
+```
+
+## Funciones estadísticas
+
+Otro comando usado es el comando *rnorm*. Este lo que hace es generar datos aleatorios, pero forzando a que esos datos sigan la forma de una Distribución Normal (la famosa campana de Gauss).
+
+Podemos asignarle ciertos parámetros si queremos: *Tamaño de la muestra  * **n** (es la cantidad de datos que le pides a R que invente, en este caso 350) *Media* (el valor central, en este caso 22), o *Desviación estándar* (Representa la dispersión o el "error experimental", en este caso, 5).
+
+
+```{r}
+
+z1 <- rnorm(350, 22, 5)
+z1
+
+```
+
+
+```{r}
+w1 <- length(z1)
+w1
+
+x1 <- 500:849
+x1
+
+plot(z1, x1)
+
+```
+
+El comando *hist()* genera un histograma.
+
+```{r}
+hist(z1, main = "Histograma de edades", breaks = 60)
+
+```
+
+El comando *density()* calcula la densidad de probabilidad. Es la versión matemática, suavizada y continua del histograma.
+
+```{r}
+density(z1,type="b")
+```
+
+
+```{r}
+plot(density(z1),type="b")
+```
+
+
+---
+    
+    ## Ejercicio 1: Designación
+    
+**Consigna:** Las ultimas 3 cifras del DNI son 364, crear una variable que tenga ese número
+
+```{r}
+
+DNI <- 364
+
+```
+
+**Consigna:** Crear un vector del 1 al 364.
+
+```{r}
+lista_dni <- 1:364
+lista_dni
+```
+
+---
+    
+    ## Ejercicio 2: Uso de for
+    
+**Consigna:** Calcular la suma de todos los valores del vector *lista_dni* usando un for:
+    
+    ```{r}
+Total <- 0
+valor_final <- length(lista_dni)
+
+for (i in 1:valor_final) {
+    Total <- Total + i
+}
+
+Total
+```
+
+---
+    
+    ## Ejercicio 3: Python
+    
+    **Consigna:** Repetir el ejercicio anterior pero en Phyton
+
+```{python}
+# --- Ejercicio 1 ---
+# Consigna: Crear una variable con las últimas 3 cifras del DNI (364)
+dni = 364
+
+# Consigna: Crear un vector (lista) del 1 al 364
+# En Python, range(1, 364) genera números del 1 al 364
+lista_dni = list(range(1, dni + 1))
+
+# --- Ejercicio 2 ---
+# Calcular la suma de todos los valores usando un bucle 'for'
+total = 0
+
+for i in lista_dni:
+    total += i
+
+# Mostrar el resultado final
+print(f"Suma total: {total}")
+
+
+```
+
+----
+    
+    ## Ejercicio 4: Medición de tiempo (sys.time) 
+    
+    **Consigna:**¿Cuanto tarda en correr el código del ejercicio 2?
+    
+    Usamos el comando **sys.time**
+    
+    ```{r}
+inicio <- Sys.time()
+total <- 0
+valor_final <- 10000000*length(lista_dni)
+for (i in 1:valor_final)
+    total <- total + i  
+total
+final <- Sys.time()
+final-inicio
+```
+
+---
+    
+## Ejercicio 5: 2da medición de tiempo (tictoc)
+    
+**Consigna:** Aplicar la consigna anterior pero aprendiendo a usar el comando **tictoc**
+    
+    ```{r}
+library(tictoc)
+
+# Iniciamos el cronómetro asignándole un nombre descriptivo a la prueba
+tic("Tiempo de ejecución")
+
+# Inicio del bloque a medir
+Total<-0
+valor_final<-length(lista_dni)
+
+for(i in 1:valor_final) {
+    Total<-Total + i
+}
+# Fin del bloque a medir
+
+#Se "detiene" el cronómetro. 
+
+#Esto imprimirá el tiempo transcurrido en pantalla.
+toc()
+
+#Imprimimos la variable Total para verificar que el cálculo matemático se hizo bien
+Total
+```
+
+---
+    
+## Ejercicio 6: Secuencia
+    
+**Consigna:** Generar secuencia de 2 en 2 hasta 50000
+
+```{r}
+inicio_for <- Sys.time()
+
+A <- numeric(50000)
+for (i in 1:50000) {
+    A[i] <- i * 2
+}
+
+final_for <- Sys.time()
+tiempo_for <- final_for - inicio_for
+```
+
+Secuencia con función de R:
+    
+    ```{r}
+inicio_seq <- Sys.time()
+
+B <- seq(2, 100000, by = 2)
+
+final_seq <- Sys.time()
+tiempo_seq <- final_seq - inicio_seq
+
+# Resultados
+tiempo_for
+tiempo_seq
+```
+
+---
+    
+## Ejercicio 7: Serie de Fibonacci
+    
+    **Consigna:** Generar sucesión o serie de Fibonacci hasta superar 1.000.000
+
+```{r}
+# Generar Fibonacci hasta superar 1.000.000
+
+fibonacci <- c(0,1)
+iteraciones <- 2
+
+while (fibonacci[length(fibonacci)] <= 1000000) {
+    nuevo <- fibonacci[length(fibonacci)] + fibonacci[length(fibonacci)-1]
+    fibonacci <- c(fibonacci, nuevo)
+    iteraciones <- iteraciones + 1
+}
+
+fibonacci
+iteraciones
+
+```
+
+---
+    
+    ## Ejercicio 8: Definición matemática recurrente
+    
+**Consigna:**¿Cuantas iteraciones se necesitan para generar un número de la serie mayor que 1.000.000?
+    
+    ```{r}
+f0<-0   #Valores iniciales
+f1<-1
+f2<-0 
+i<-0  #Número de iteraciones incial
+valorfinal<-1000000 #Umbral
+
+while (f2<valorfinal) {
+    
+    f2=f0+f1
+    f0=f1
+    f1=f2
+    i<-i+1
+    
+}
+f2
+i
+```
+
+---
+    
+    ## Ejercicio 9: Método Burbuja (Bubble Sort)
+    
+**Consigna:** Compara la performance de ordenación del método burbuja vs el método sort de R.
+
+```{r}
+x <- sample(1:20000, 20000)
+
+burbuja <- function(x) {
+    n <- length(x)
+    for (j in 1:(n-1)) {
+        for (i in 1:(n-j)) {
+            if (x[i] > x[i+1]) {
+                temp <- x[i]
+                x[i] <- x[i+1]
+                x[i+1] <- temp
+            }
+        }
+    }
+    return(x)
+}
+```
+
+Comparación:
+    
+    ```{r}
+system.time({
+    res1 <- burbuja(x)
+})
+
+system.time({
+    res2 <- sort(x)
+})
+
+```
+
+
+---
+    
+    ## Ejercicio 10: Penitencia de Newton
+    
+**Consigna:** Desarrollar dos algoritmos que hagan el trabajo de sumar desde 1 hasta 1000000 y verifcar cuál de los dos es más eficiente
+
+**Método 1 (for):**
+    
+    ```{r}
+n <- 1000000
+
+system.time({
+    suma1 <- 0
+    for (i in 1:n) {
+        suma1 <- suma1 + i
+    }
+})
+
+```
+
+
+Método 2 (fórmula matemática):
+    
+    ```{r}
+system.time({
+    suma2 <- n * (n + 1) / 2
+})
+
+```
+
+Comparación:
+    ```{r}
+suma1
+suma2
+```
+
+---
+    
+    ## Conclusión final:
+En este trabajo se evaluó la eficiencia de diversos algoritmos en R utilizando técnicas de benchmarking (Sys.time, tictoc y microbenchmark). Se comprobó empíricamente que la calidad de un código no radica únicamente en su exactitud, sino en la optimización de los recursos de procesamiento y el tiempo de ejecución. El ejercicio "La penitencia de Newton" ilustra claramente esta premisa: mientras que un bucle iterativo presenta un alto costo computacional ante operaciones masivas, la aplicación de un modelo matemático adecuado resuelve el problema de forma casi instantánea. Las métricas obtenidas confirman que el razonamiento lógico-matemático previo supera a la capacidad del hardware como principal factor de optimización. Los métodos analíticos resultan órdenes de magnitud más eficientes que la iteración tradicional.
+
+---
